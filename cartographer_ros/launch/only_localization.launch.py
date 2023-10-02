@@ -31,13 +31,10 @@ from launch.substitutions import ThisLaunchFileDir
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     cartographer_config_dir = FindPackageShare('cartographer_ros').find('cartographer_ros') + '/configuration_files'
-    configuration_basename = 'backpack_2d.lua'
-
-    resolution = LaunchConfiguration('resolution', default='0.05')
-    publish_period_sec = LaunchConfiguration('publish_period_sec', default='1.0')
+    configuration_basename = 'only_localization.lua'
 
     
-    # load_state_filename = '/home/nuc/Downloads/map-small-track-v2-05_13.pbstream'
+    load_state_filename = '/home/nuc/icra_v1.pbstream'
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -61,13 +58,11 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time}],
             arguments=['-configuration_directory', cartographer_config_dir,
                        '-configuration_basename', configuration_basename,
-                    #    '-load_state_filename', load_state_filename
+                       '-load_state_filename', load_state_filename
                         ],
             # remappings=[('/imu', '/sensing/vesc/imu'),
             #             ('odom', '/localization/odometry')],
         ),  
-
-
 
         Node(
             package = 'cartographer_ros',
@@ -77,4 +72,3 @@ def generate_launch_description():
                 {'resolution': 0.05}],
         ),
     ])
-

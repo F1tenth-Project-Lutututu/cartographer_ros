@@ -44,8 +44,41 @@ options = {
 
 MAP_BUILDER.use_trajectory_builder_2d = true
 
-TRAJECTORY_BUILDER_2D.max_range = 20.0
+-- TRAJECTORY_BUILDER_2D.min_range = 0.12/
+TRAJECTORY_BUILDER_2D.max_range = 9.0
+TRAJECTORY_BUILDER_2D.min_range = 0.2
+-- TRAJECTORY_BUILDER_2D.missing_data_ray_length = 3.
 TRAJECTORY_BUILDER_2D.use_imu_data = true
+
+--------------- ONLY FOR LOCALIZATION ---------------------
+
+
+
+TRAJECTORY_BUILDER.pure_localization_trimmer = {
+  max_submaps_to_keep = 3,
+}
+
+POSE_GRAPH.constraint_builder.sampling_ratio = 0.3
+POSE_GRAPH.global_sampling_ratio = 0.003
+
+-- TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 1.
+-- TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 10000.0
+
+-- POSE_GRAPH.matcher_translation_weight = 1e5
+-- POSE_GRAPH.matcher_rotation_weight = 1e3
+
+
+-- POSE_GRAPH.optimize_every_n_nodes = 5
+-- TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = true 
+
+-- POSE_GRAPH.constraint_builder.sampling_ratio = 0.05
+-- POSE_GRAPH.constraint_builder.min_score = 0.25
+-- POSE_GRAPH.global_constraint_search_after_n_seconds = 20
+-- POSE_GRAPH.constraint_builder.ceres_scan_matcher.ceres_solver_options.max_num_iterations = 6
+-- MAP_BUILDER.num_background_threads = 4
+-- POSE_GRAPH.global_sampling_ratio = 0.003
+
+------------------------------------------------------------
 
 
 return options
